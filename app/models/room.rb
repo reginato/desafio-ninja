@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
-  has_many :schedules
-
+class Room < ApplicationRecord
+  has_many :schedules  
+  
   validates :name, presence: true
 end
   
