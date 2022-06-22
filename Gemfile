@@ -26,5 +26,4 @@ group :development, :test do
   gem 'database_cleaner', '~> 2.0.1'
 end
 
-
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
