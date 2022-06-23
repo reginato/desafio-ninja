@@ -25,6 +25,24 @@ module Api
         end
       end
 
+
+      def update
+        schedule = Schedule.find(params[:id])
+
+        if valid_time? && schedule.update(schedule_params)
+          render json: { status: 'SUCCESS', message: 'Schedule updated.', data: schedule }, status: :ok
+        else
+          render json: { status: 'ERROR', message: 'Can not update Schedule', data: schedule }, status: :unprocessable_entity
+        end
+      end
+  
+      def destroy
+        schedule = Schedule.find(params[:id])
+
+        schedule.destroy
+        render json: { status: 'SUCCESS', message: 'Schedule deleted.', data: schedule }, status: :ok
+      end      
+
       def schedule_params
         params.permit(:room_id, :user_id, :scheduled_at, :id)
       end

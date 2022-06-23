@@ -54,4 +54,31 @@ RSpec.describe Api::V1::SchedulesController, type: :controller do
     end
   end  
 
+  describe "PUT update" do
+    let!(:schedule) { create(:schedule) }
+     
+    context 'with a valid attributes' do
+      it 'update a schedule' do
+        put :update, params: { id: schedule.id, scheduled_at: "2022-07-21, 11:00 am" }
+
+        expect(schedule.reload.scheduled_at).to eq("2022-07-21 11:00:00 am")
+      end  
+
+      it 'dont update a schedule' do
+        put :update, params: { id: schedule.id, scheduled_at: nil }
+
+        expect(schedule.reload.scheduled_at).to eq("2022-07-21 9:00:00 am")
+      end  
+    end  
+  end  
+
+  describe '#destroy' do
+    context 'existing post' do
+      let!(:schedule) { create(:schedule) }
+
+      it 'removes post from table' do
+        expect { delete :destroy, params: { id: schedule.id } }.to change { Schedule.count }.by(-1)
+      end
+    end
+  end    
 end  
