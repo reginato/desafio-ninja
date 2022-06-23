@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScheduleSearch
     def initialize(schedule_params)
       @room_id = schedule_params[:room_id]
