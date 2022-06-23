@@ -73,8 +73,8 @@ request:
 curl --location --request POST 'localhost:3000/api/v1/schedules' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "room_id": 8,
-    "user_id": 3,
+    "room_id": 1,
+    "user_id": 1,
     "scheduled_at": "2022-06-28, 10:00 am"
 }'
 ```
@@ -84,9 +84,9 @@ response:
     "status": "SUCCESS",
     "message": "Schedule added.",
     "data": {
-        "id": 10,
-        "room_id": 8,
-        "user_id": 3,
+        "id": 1,
+        "room_id": 1,
+        "user_id": 1,
         "scheduled_at": "2022-06-28T10:00:00.000Z",
         "created_at": "2022-06-22T20:25:35.352Z",
         "updated_at": "2022-06-22T20:25:35.352Z"
@@ -99,7 +99,7 @@ response:
 
 request:
 ```
-curl --location --request GET 'localhost:3000/api/v1/schedules/4'
+curl --location --request GET 'localhost:3000/api/v1/schedules/1'
 ```
 response:
 ```
@@ -107,8 +107,8 @@ response:
     "status": "SUCCESS",
     "message": "Schedule founded.",
     "data": {
-        "id": 4,
-        "room_id": 8,
+        "id": 1,
+        "room_id": 1,
         "user_id": 1,
         "scheduled_at": "2022-06-21T10:00:00.000Z",
         "created_at": "2022-06-22T00:10:14.370Z",
@@ -121,7 +121,7 @@ response:
 
 request:
 ```
-curl --location --request PUT 'localhost:3000/api/v1/schedules/4' \
+curl --location --request PUT 'localhost:3000/api/v1/schedules/1' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "scheduled_at": "2022-07-22, 10:00 am"
@@ -134,8 +134,8 @@ response:
     "message": "Schedule updated.",
     "data": {
         "scheduled_at": "2022-07-22T10:00:00",
-        "id": 4,
-        "room_id": 8,
+        "id": 1,
+        "room_id": 1,
         "user_id": 1,
         "created_at": "2022-06-22T00:10:14.370Z",
         "updated_at": "2022-06-22T20:33:03.905Z"
@@ -149,7 +149,7 @@ response:
 
 request:
 ```
-curl --location --request DELETE 'localhost:3000/api/v1/schedules/4'
+curl --location --request DELETE 'localhost:3000/api/v1/schedules/1'
 ```
 response:
 ```
@@ -157,8 +157,8 @@ response:
     "status": "SUCCESS",
     "message": "Schedule deleted.",
     "data": {
-        "id": 4,
-        "room_id": 8,
+        "id": 1,
+        "room_id": 1,
         "user_id": 1,
         "scheduled_at": "2022-07-22T10:00:00.000Z",
         "created_at": "2022-06-22T00:10:14.370Z",
