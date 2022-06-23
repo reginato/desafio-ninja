@@ -34,4 +34,24 @@ RSpec.describe Api::V1::SchedulesController, type: :controller do
       end  
     end
   end
+
+  describe "POST create" do
+    let(:room) { create(:room) }
+    let(:user) { create(:user) }
+
+    context "with valid attributes" do
+      it "creates a new schedule" do
+        expect{
+          post :create, params: { room_id: room.id, user_id: user.id, scheduled_at: "2022-07-21, 9:00 am" }
+        }.to change(Schedule, :count).by(1)
+      end
+
+      it "don't create a new schedule because out of work hour" do
+        expect{
+          post :create, params: { room_id: room.id, user_id: user.id, scheduled_at: "2022-07-21, 5:00 am" }
+        }.to change(Schedule, :count).by(0)
+      end      
+    end
+  end  
+
 end  
