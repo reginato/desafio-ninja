@@ -6,7 +6,7 @@ module Api
       def index
         @schedules = Schedule.all
 
-        render json: { data: @schedules }, status: :ok 
+        render json: { status: 'SUCCESS', message: 'Schedule list.', data: @schedules }, status: :ok 
       end
 
       def show
@@ -18,7 +18,7 @@ module Api
       def create
         schedule = Schedule.new(schedule_params)
         
-        if schedule.save
+        if valid_time? && schedule.save
           render json: { status: 'SUCCESS', message: 'Schedule added.', data: schedule }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Can not add the Schedule.', data: schedule.errors }, status: :unprocessable_entity
@@ -41,7 +41,15 @@ module Api
 
         schedule.destroy
         render json: { status: 'SUCCESS', message: 'Schedule deleted.', data: schedule }, status: :ok
-      end      
+      end
+      
+      private  
+      
+      def valid_time?
+        return if params[:scheduled_at].blank?
+
+        Time.parse(params[:scheduled_at]).during_business_hours?
+      end
 
       def schedule_params
         params.permit(:room_id, :user_id, :scheduled_at, :id)
