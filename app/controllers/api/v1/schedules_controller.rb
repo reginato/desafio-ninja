@@ -4,7 +4,7 @@ module Api
   module V1
     class SchedulesController < ApplicationController
       def index
-        @schedules = Schedule.all
+        @schedules = ScheduleSearch.new(schedule_params).search 
 
         render json: { status: 'SUCCESS', message: 'Schedule list.', data: @schedules }, status: :ok 
       end

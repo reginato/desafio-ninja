@@ -4,13 +4,44 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SchedulesController, type: :controller do
   describe 'GET #index' do
+    let!(:user_1) { create(:user) }
+    let!(:user_2) { create(:user) }
+    let!(:room_1) { create(:room) }
+    let!(:room_2) { create(:room) }
+    let!(:schedule_1) { create(:schedule, room: room_1, user: user_2) }
+    let!(:schedule_2) { create(:schedule, room: room_1, user: user_1) }
+    let!(:schedule_3) { create(:schedule, room: room_2, user: user_1) }
+    let!(:schedule_4) { create(:schedule, room: room_2, user: user_2) }
+
     context 'when params is right' do
 
       it 'return all schedules'do
         get :index
 
         expect(response).to have_http_status(:ok)
-      end    
+        expect(JSON.parse(response.body)["data"].count).to eq(4)
+      end
+
+      it 'return just room 1'do
+        get :index, params: { room_id: room_1.id }
+
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)["data"].count).to eq(2)
+      end
+
+      it 'return just user 1'do
+        get :index, params: { user_id: user_1.id }
+
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)["data"].count).to eq(2)
+      end      
+
+      it 'return just user 1 or room 1'do
+        get :index, params: { user_id: user_1.id, room_1: room_1.id }
+
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)["data"].count).to eq(2)
+      end      
     end
   end 
 
