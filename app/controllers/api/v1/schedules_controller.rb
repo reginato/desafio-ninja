@@ -8,6 +8,12 @@ module Api
 
         render json: { data: @schedules }, status: :ok 
       end
+
+      def show
+        schedule = Schedule.find(params[:id])
+
+        render json: { status: 'SUCCESS', message: 'Schedule founded.', data: schedule }, status: :ok
+      end
     end  
   end
 end    

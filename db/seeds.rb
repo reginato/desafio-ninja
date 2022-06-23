@@ -1,2 +1,2 @@
-Room.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }, { name: 'Hobbit' }, { name: 'Avengers' }])
+Room.create([{ name: 'Mandalorian' }, { name: 'Lord of the Rings' }, { name: 'Hobbit' }, { name: 'Avengers' }])
 User.create([{ name: 'Rodrigo Reginato', email: 'rreginatom@gmail.com'}, { name: 'Theo Lima', email: 'theolima@gmail.com'} ])
